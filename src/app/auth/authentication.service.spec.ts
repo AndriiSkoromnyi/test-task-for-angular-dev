@@ -24,7 +24,6 @@ describe('AuthenticationService', () => {
       // Act
       const request = authenticationService.login({
         username: 'toto',
-        password: '123',
       });
       tick();
 
@@ -41,7 +40,6 @@ describe('AuthenticationService', () => {
       // Act
       const request = authenticationService.login({
         username: 'toto',
-        password: '123',
       });
       tick();
 
@@ -58,7 +56,6 @@ describe('AuthenticationService', () => {
       // Act
       const request = authenticationService.login({
         username: 'toto',
-        password: '123',
       });
       tick();
 
@@ -73,7 +70,6 @@ describe('AuthenticationService', () => {
       // Act
       const request = authenticationService.login({
         username: 'toto',
-        password: '123',
         remember: true,
       });
       tick();
@@ -91,7 +87,6 @@ describe('AuthenticationService', () => {
       // Arrange
       const loginRequest = authenticationService.login({
         username: 'toto',
-        password: '123',
       });
       tick();
 

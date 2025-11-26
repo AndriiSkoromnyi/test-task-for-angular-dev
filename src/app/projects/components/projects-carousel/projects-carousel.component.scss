@@ -1,0 +1,117 @@
+@mixin glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.carousel {
+  width: 100%;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  &__slide {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  &__dots {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    &--active {
+      background: #4facfe;
+      box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+      transform: scale(1.2);
+    }
+  }
+}
+
+.project-highlight {
+  @include glass-panel;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+  }
+
+  &__desc {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+  }
+
+  &__btn {
+    display: inline-block;
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-top: 1rem;
+    align-self: flex-start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+    }
+  }
+}

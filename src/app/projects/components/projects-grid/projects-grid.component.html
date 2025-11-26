@@ -1,0 +1,85 @@
+<section class="services">
+  <div class="services__header">
+    <h2 class="services__title">All Top Projects</h2>
+  </div>
+
+  <div *ngIf="isLoading" class="services__loading">
+    <p>Loading GitHub repositories...</p>
+  </div>
+
+  <div class="services__grid" *ngIf="!isLoading">
+    <a
+      *ngFor="let repo of repositories"
+      [href]="repo.html_url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="service-card service-card--clickable"
+    >
+      <div class="service-card__content">
+        <h3 class="service-card__name">{{ repo.name }}</h3>
+        <p class="service-card__description">{{ repo.description || 'No description available' }}</p>
+        <div class="service-card__meta">
+          <span class="service-card__language" *ngIf="repo.language">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              style="vertical-align: middle; margin-right: 4px"
+            >
+              <path
+                d="M9 13C8.34 13.33 7.79 13.82 7.38 14.43C7.15 14.78 7.15 15.22 7.38 15.57C7.79 16.18 8.34 16.67 9 17"
+                stroke="#FBFBFB"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M15.21 13C15.87 13.33 16.42 13.82 16.83 14.43C17.06 14.78 17.06 15.22 16.83 15.57C16.42 16.18 15.87 16.67 15.21 17"
+                stroke="#FBFBFB"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
+                stroke="#FBFBFB"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2.23 8.01L21.45 8"
+                stroke="#FBFBFB"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            {{ repo.language }}
+          </span>
+          <span class="service-card__stars">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="19"
+              viewBox="0 0 20 19"
+              fill="none"
+              style="vertical-align: middle; margin-right: 4px"
+            >
+              <path
+                d="M8.603 1.61597C8.9446 0.794679 10.108 0.794677 10.4496 1.61597L12.3075 6.08274L17.1297 6.46933C18.0164 6.54042 18.3759 7.64692 17.7004 8.22559L14.0263 11.3728L15.1488 16.0785C15.3552 16.9437 14.4139 17.6276 13.6548 17.1639L9.52632 14.6422L5.39781 17.1639C4.63871 17.6276 3.69745 16.9437 3.90384 16.0785L5.02632 11.3728L1.35228 8.22559C0.676741 7.64692 1.03627 6.54042 1.92292 6.46933L6.74517 6.08274L8.603 1.61597Z"
+                stroke="#FBFBFB"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            {{ repo.stargazers_count }}
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>

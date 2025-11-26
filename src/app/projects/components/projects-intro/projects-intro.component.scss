@@ -1,0 +1,29 @@
+.intro__content {
+  padding-left: 1rem;
+}
+
+.intro__title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.1;
+}
+
+.intro__text {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .intro__content {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .intro__title {
+    font-size: 2.5rem;
+  }
+}

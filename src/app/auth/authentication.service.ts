@@ -5,7 +5,6 @@ import { Credentials, CredentialsService } from './credentials.service';
 
 export interface LoginContext {
   username: string;
-  password: string;
   remember?: boolean;
 }
 

@@ -1,0 +1,11 @@
+<header class="projects-page__header">
+  <div class="header">
+    <div class="header__logo">ANGULAR DEV</div>
+    <nav class="header__nav">
+      <a routerLink="/home" class="header__link">Home</a>
+      <a *ngIf="githubProfileUrl" [href]="githubProfileUrl" target="_blank" class="header__link">My Profile</a>
+      <a (click)="logout.emit()" class="header__link" style="cursor: pointer">Logout</a>
+    </nav>
+    <div class="header__info">{{ getCurrentDate() }}</div>
+  </div>
+</header>

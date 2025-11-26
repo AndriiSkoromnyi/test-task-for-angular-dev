@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WeatherService, WeatherData } from './weather.service';
+import { GithubService, GithubRepository } from './github.service';
+import { CredentialsService, AuthenticationService } from '@app/auth';
 import { finalize } from 'rxjs/operators';
-import { AuthenticationService, CredentialsService } from '@app/auth';
-import { GithubRepository, GithubService } from '@app/projects/github.service';
-import { WeatherData, WeatherService } from '@app/projects/weather.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class ProjectsComponent implements OnInit {
   weatherData: WeatherData | null = null;
   isLoadingWeather = false;
 

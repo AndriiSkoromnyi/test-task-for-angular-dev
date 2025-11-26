@@ -1,0 +1,189 @@
+<section class="weather-section">
+  <div class="weather-section__container">
+    <h2 class="weather-section__title">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="48"
+        height="48"
+        viewBox="0 0 24 24"
+        fill="none"
+        style="vertical-align: middle; margin-right: 8px"
+      >
+        <path
+          d="M12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5Z"
+          stroke="#FBFBFB"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M19.14 19.14L19.01 19.01M19.01 4.99L19.14 4.86L19.01 4.99ZM4.86 19.14L4.99 19.01L4.86 19.14ZM12 2.08V2V2.08ZM12 22V21.92V22ZM2.08 12H2H2.08ZM22 12H21.92H22ZM4.99 4.99L4.86 4.86L4.99 4.99Z"
+          stroke="#FBFBFB"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      Current Weather
+    </h2>
+
+    <div *ngIf="isLoading" class="weather-section__loading">
+      <p>Loading real-time weather data...</p>
+    </div>
+
+    <div *ngIf="weatherData && !isLoading" class="weather-card">
+      <div class="weather-card__header">
+        <h3 class="weather-card__location">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            style="vertical-align: middle; margin-right: 6px"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M7.37584 4.85915C8.65549 3.61971 10.1969 3 12 3C13.8031 3 15.3372 3.61267 16.6023 4.83803C17.8675 6.06339 18.5 7.54929 18.5 9.29577C18.5 10.169 18.2746 11.169 17.8238 12.2958C17.373 13.4225 16.8277 14.4789 16.1879 15.4648C15.5481 16.4507 14.9156 17.3732 14.2903 18.2324C13.665 19.0916 13.1342 19.7746 12.698 20.2817L12 21C11.8255 20.8028 11.5928 20.5423 11.302 20.2183C11.0112 19.8944 10.4877 19.2465 9.73154 18.2746C8.97539 17.3028 8.31376 16.3592 7.74664 15.4437C7.17953 14.5282 6.66331 13.493 6.19799 12.338C5.73266 11.1831 5.5 10.169 5.5 9.29577C5.5 7.54929 6.12527 6.07043 7.37584 4.85915Z"
+              stroke="#FBFBFB"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M13 9.5C13 10.0523 12.5523 10.5 12 10.5C11.4477 10.5 11 10.0523 11 9.5C11 8.94772 11.4477 8.5 12 8.5C12.5523 8.5 13 8.94772 13 9.5Z"
+              stroke="#FBFBFB"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          {{ weatherData.name }}, {{ weatherData.sys.country }}
+        </h3>
+      </div>
+
+      <div class="weather-card__main">
+        <div class="weather-card__temp">
+          <span class="weather-card__temp-value">{{ kelvinToCelsius(weatherData.main.temp) }}</span>
+          <span class="weather-card__temp-unit">°C</span>
+        </div>
+        <div class="weather-card__condition">
+          <p class="weather-card__description">{{ weatherData.weather[0].description }}</p>
+          <p class="weather-card__feels-like">Feels like {{ kelvinToCelsius(weatherData.main.feels_like) }}°C</p>
+        </div>
+      </div>
+
+      <div class="weather-card__details">
+        <div class="weather-card__detail">
+          <span class="weather-card__detail-label">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              style="vertical-align: middle; margin-right: 6px"
+            >
+              <path
+                d="M12.61 2.21C12.25 1.93 11.75 1.93 11.39 2.21C9.49001 3.66 3.88 8.39 3.91 13.9C3.91 18.36 7.54001 22 12.01 22C16.48 22 20.11 18.37 20.11 13.91C20.12 8.48 14.5 3.67 12.61 2.21Z"
+                stroke="#FBFBFB"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+              />
+            </svg>
+            Humidity
+          </span>
+          <span class="weather-card__detail-value">{{ weatherData.main.humidity }}%</span>
+        </div>
+        <div class="weather-card__detail">
+          <span class="weather-card__detail-label">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              style="vertical-align: middle; margin-right: 6px"
+            >
+              <path
+                d="M2 15H18.5C20.43 15 22 16.57 22 18.5C22 20.43 20.43 22 18.5 22C16.57 22 15 20.43 15 18.5V18"
+                stroke="#FBFBFB"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 12H18.5C20.42 12 22 10.43 22 8.5C22 6.58 20.42 5 18.5 5C16.58 5 15 6.57 15 8.5V9"
+                stroke="#FBFBFB"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 9H9.31C10.8 9 12 7.79 12 6.31C12 4.82 10.79 3.62 9.31 3.62C7.82 3.62 6.62 4.83 6.62 6.31V6.69"
+                stroke="#FBFBFB"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Wind
+          </span>
+          <span class="weather-card__detail-value">{{ weatherData.wind.speed.toFixed(1) }} m/s</span>
+        </div>
+        <div class="weather-card__detail">
+          <span class="weather-card__detail-label">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              style="vertical-align: middle; margin-right: 6px"
+            >
+              <path
+                d="M6.6 13.9528L7.1721 14.773C7.44022 14.586 7.6 14.2797 7.6 13.9528H6.6ZM11.4 13.9528H10.4C10.4 14.2373 10.5211 14.5082 10.7331 14.6979L11.4 13.9528ZM9 16.4C8.44771 16.4 8 16.8477 8 17.4C8 17.9523 8.44771 18.4 9 18.4V17.4V16.4ZM9.05625 18.4C9.60853 18.4 10.0562 17.9523 10.0562 17.4C10.0562 16.8477 9.60853 16.4 9.05625 16.4V17.4V18.4ZM13.2 17.4H12.2C12.2 19.1673 10.7673 20.6 9 20.6V21.6V22.6C11.8719 22.6 14.2 20.2719 14.2 17.4H13.2ZM9 21.6V20.6C7.23269 20.6 5.8 19.1673 5.8 17.4H4.8H3.8C3.8 20.2719 6.12812 22.6 9 22.6V21.6ZM4.8 17.4H5.8C5.8 16.3134 6.34063 15.353 7.1721 14.773L6.6 13.9528L6.0279 13.1326C4.68319 14.0706 3.8 15.6321 3.8 17.4H4.8ZM11.4 13.9528L10.7331 14.6979C11.0779 15.0066 11.4596 15.4702 11.7503 15.9879C12.0462 16.515 12.2 17.0123 12.2 17.4H13.2H14.2C14.2 16.5438 13.8834 15.702 13.4942 15.0088C13.0996 14.3061 12.5813 13.6681 12.0669 13.2077L11.4 13.9528ZM11.4 4.79999H10.4V13.9528H11.4H12.4V4.79999H11.4ZM6.6 13.9528H7.6V4.79843H6.6H5.6V13.9528H6.6ZM9 2.39999V3.39999C9.7732 3.39999 10.4 4.0268 10.4 4.79999H11.4H12.4C12.4 2.92223 10.8778 1.39999 9 1.39999V2.39999ZM9 2.39999V1.39999C7.12308 1.39999 5.6 2.91981 5.6 4.79843H6.6H7.6C7.6 4.02608 8.22595 3.39999 9 3.39999V2.39999ZM9 17.4V18.4H9.05625V17.4V16.4H9V17.4ZM19.2 7.19999H18.2C18.2 7.97319 17.5732 8.59999 16.8 8.59999V9.59999V10.6C18.6778 10.6 20.2 9.07776 20.2 7.19999H19.2ZM16.8 9.59999V8.59999C16.0268 8.59999 15.4 7.97319 15.4 7.19999H14.4H13.4C13.4 9.07776 14.9222 10.6 16.8 10.6V9.59999ZM14.4 7.19999H15.4C15.4 6.4268 16.0268 5.79999 16.8 5.79999V4.79999V3.79999C14.9222 3.79999 13.4 5.32223 13.4 7.19999H14.4ZM16.8 4.79999V5.79999C17.5732 5.79999 18.2 6.4268 18.2 7.19999H19.2H20.2C20.2 5.32223 18.6778 3.79999 16.8 3.79999V4.79999Z"
+                fill="#FBFBFB"
+              />
+            </svg>
+            Pressure
+          </span>
+          <span class="weather-card__detail-value">{{ weatherData.main.pressure }} hPa</span>
+        </div>
+        <div class="weather-card__detail">
+          <span class="weather-card__detail-label">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              style="vertical-align: middle; margin-right: 6px"
+            >
+              <path
+                d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42 13.98 8.42 12C8.42 10.02 10.02 8.42 12 8.42C13.98 8.42 15.58 10.02 15.58 12Z"
+                stroke="#FBFBFB"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.4C18.82 5.8 15.53 3.72 12 3.72C8.47 3.72 5.18 5.8 2.89 9.4C1.99 10.81 1.99 13.18 2.89 14.59C5.18 18.19 8.47 20.27 12 20.27Z"
+                stroke="#FBFBFB"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Visibility
+          </span>
+          <span class="weather-card__detail-value">{{ (weatherData.visibility / 1000).toFixed(1) }} km</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
